@@ -1,0 +1,50 @@
+plex:
+  base_url: "http://host.docker.internal:32400"
+  token: "${PLEX_TOKEN}"
+  library_name: "Other Video"
+  request_timeout_seconds: 15
+  max_retries: 3
+  retry_backoff_seconds: 0.5
+
+jellyfin:
+  base_url: "http://jellyfin:8096"
+  api_key: "${JELLYFIN_API_KEY}"
+  library_name: "Other Video"
+  request_timeout_seconds: 15
+  max_retries: 3
+  retry_backoff_seconds: 0.5
+
+user_mapping: []
+
+path_mapping:
+  rules: []
+
+sync:
+  debounce_seconds: 5
+  full_sync_debounce_seconds: 2
+  user_data_debounce_seconds: 2
+  field_mapping:
+    studio: true
+    writers_as_actors: true
+    directors: true
+    collections: true
+  user_data:
+    watched: true
+    play_count: true
+    rating: true
+  merging:
+    enabled: true
+    refresh_timeout_seconds: 30
+    max_requeue_count: 2
+  lock_synced_fields: true
+
+webhook:
+  listen_port: 8089
+  shared_secret: "${WEBHOOK_SHARED_SECRET:-}"
+
+logging:
+  level: "INFO"
+  format: "json"
+
+state:
+  sqlite_path: "/state/sync.db"

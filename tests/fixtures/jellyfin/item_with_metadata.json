@@ -1,0 +1,8 @@
+{
+  "Id": "item-1",
+  "Path": "/media/a.mkv",
+  "Studios": [{"Name": "Studio A"}],
+  "People": [{"Name": "Alice", "Type": "Actor"}],
+  "LockedFields": ["Cast", "Studios"],
+  "MediaSources": [{"Id": "src-1", "Path": "/media/a.mkv"}]
+}

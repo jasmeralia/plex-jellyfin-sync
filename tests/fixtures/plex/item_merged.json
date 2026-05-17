@@ -1,0 +1,19 @@
+{
+  "ratingKey": 42,
+  "studio": "Studio A",
+  "writers": ["Alice"],
+  "directors": ["Bob"],
+  "collections": ["Favorites"],
+  "media": [
+    {
+      "parts": [
+        "/media/a.mkv",
+        "/media/b.mkv"
+      ]
+    }
+  ],
+  "isWatched": true,
+  "viewCount": 3,
+  "userRating": 8.5,
+  "lastViewedAt": "2024-01-02T00:00:00+00:00"
+}

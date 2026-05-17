@@ -1,0 +1,13 @@
+.venv/
+.pytest_cache/
+.codex
+__pycache__/
+*.py[cod]
+*.egg-info/
+config/config.yaml
+tests/harness/config/config.yaml
+tests/harness/media/
+tests/harness/state/
+tests/harness/jellyfin/config/
+tests/harness/jellyfin/cache/
+.serena/

@@ -1,0 +1,54 @@
+plex:
+  base_url: "http://plex:32400"
+  token: "${PLEX_TOKEN}"
+  library_name: "Other Video"
+  request_timeout_seconds: 15
+  max_retries: 3
+  retry_backoff_seconds: 0.5
+
+jellyfin:
+  base_url: "http://jellyfin:8096"
+  api_key: "${JELLYFIN_API_KEY}"
+  library_name: "Other Video"
+  request_timeout_seconds: 15
+  max_retries: 3
+  retry_backoff_seconds: 0.5
+
+user_mapping:
+  - plex_account: "jas"
+    plex_token: null
+    jellyfin_user_id: "replace-with-jellyfin-user-id"
+
+path_mapping:
+  rules: []
+
+sync:
+  debounce_seconds: 900
+  full_sync_debounce_seconds: 30
+  user_data_debounce_seconds: 60
+  field_mapping:
+    studio: true
+    writers_as_actors: true
+    directors: true
+    collections: true
+  user_data:
+    watched: true
+    play_count: true
+    rating: true
+  merging:
+    enabled: true
+    refresh_timeout_seconds: 120
+    max_requeue_count: 3
+  lock_synced_fields: true
+
+webhook:
+  listen_port: 8089
+  # Blank or whitespace-only values disable webhook secret validation.
+  shared_secret: "${WEBHOOK_SHARED_SECRET:-}"
+
+logging:
+  level: "INFO"
+  format: "json"
+
+state:
+  sqlite_path: "${SYNC_SQLITE_PATH:-./state/sync.db}"

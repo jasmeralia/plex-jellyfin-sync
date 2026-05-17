@@ -1,0 +1,29 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:10.10.7
+    container_name: plex-jellyfin-sync-jellyfin-test
+    restart: unless-stopped
+    ports:
+      - "18096:8096"
+    volumes:
+      - ./tests/harness/jellyfin/config:/config
+      - ./tests/harness/jellyfin/cache:/cache
+      - ./tests/harness/media:/media/othervideo:ro
+
+  sync:
+    build:
+      context: .
+    container_name: plex-jellyfin-sync-test
+    restart: unless-stopped
+    depends_on:
+      - jellyfin
+    ports:
+      - "18089:8089"
+    environment:
+      PLEX_TOKEN: "${PLEX_TOKEN:-test-plex-token}"
+      JELLYFIN_API_KEY: "${JELLYFIN_API_KEY:-replace-after-jellyfin-bootstrap}"
+      WEBHOOK_SHARED_SECRET: "${WEBHOOK_SHARED_SECRET:-}"
+    volumes:
+      - ./tests/harness/config:/config:ro
+      - ./tests/harness/state:/state
+      - ./tests/harness/media:/media/othervideo:ro

@@ -1,0 +1,26 @@
+services:
+  sync:
+    build:
+      context: .
+      args:
+        SYNC_UID: "${SYNC_UID:-568}"
+        SYNC_GID: "${SYNC_GID:-568}"
+    container_name: plex-jellyfin-sync
+    restart: unless-stopped
+    ports:
+      - "8089:8089"
+    environment:
+      PLEX_TOKEN: "replace-with-plex-token"
+      JELLYFIN_API_KEY: "replace-with-jellyfin-api-key"
+      WEBHOOK_SHARED_SECRET: ""
+      SYNC_SQLITE_PATH: "/state/sync.db"
+    volumes:
+      - ./config:/config:ro
+      - ./state:/state
+      - /mnt/tank/media/othervideo:/media/othervideo:ro
+    networks:
+      - media
+
+networks:
+  media:
+    external: true

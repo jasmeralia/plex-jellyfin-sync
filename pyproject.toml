@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "plex-jellyfin-sync"
+version = "0.1.0"
+description = "One-way metadata and user-data sync from Plex to Jellyfin"
+requires-python = ">=3.12"
+dependencies = [
+  "fastapi>=0.115,<1",
+  "plexapi>=4.16,<5",
+  "pydantic>=2.8,<3",
+  "pyyaml>=6,<7",
+  "requests>=2.32,<3",
+  "structlog>=24.1,<25",
+  "uvicorn[standard]>=0.30,<1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "httpx>=0.28,<1",
+  "pytest>=8.3,<9",
+  "pytest-asyncio>=0.23,<1",
+  "responses>=0.25,<1",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.setuptools.packages.find]
+include = ["plex_jellyfin_sync*"]
