@@ -18,12 +18,12 @@ COPY plex_jellyfin_sync /app/plex_jellyfin_sync
 RUN rm -f /app/plex_jellyfin_sync/codex_loop.py /app/plex_jellyfin_sync/responses_loop.py \
     && python -m pip install --no-cache-dir .
 
-RUN groupadd --gid "${SYNC_GID}" sync \
-    && useradd --uid "${SYNC_UID}" --gid "${SYNC_GID}" --create-home --home-dir /home/sync sync \
-    && mkdir -p /config /state /home/sync \
-    && chown -R sync:sync /config /state /home/sync
+RUN groupadd --gid "${SYNC_GID}" app \
+    && useradd --uid "${SYNC_UID}" --gid "${SYNC_GID}" --create-home --home-dir /home/app app \
+    && mkdir -p /config /state /home/app \
+    && chown -R app:app /config /state /home/app
 
-USER sync
+USER app
 
 ENTRYPOINT ["tini", "--"]
 CMD ["python", "-m", "plex_jellyfin_sync", "--config", "/config/config.yaml"]
